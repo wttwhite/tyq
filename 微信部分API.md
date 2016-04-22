@@ -42,8 +42,8 @@
 用户登录后管理平台首页显示需要的数据信息
 **http请求说明**
 
-	管理平台API：cms.dyday.cn/api/usercumulate？access_token=TOKEN
-    远程API： www.dyday.cn/apis/usercumulate？access_token=TOKEN
+	管理平台API：cms.dmday.cn/api/usercumulate？access_token=TOKEN
+    远程API： www.dmday.cn/apis/usercumulate？access_token=TOKEN
     请求方式：GET
     
 **返回数据说明**
@@ -120,7 +120,7 @@
 
 **http说明**
 	
-    远程API：www.dyday.cn/apis/wechat/message？access_token=TOKEN
+    远程API：www.dmday.cn/apis/wechat/message？access_token=TOKEN
     请求方式：POST
     数据示例：
     {
@@ -180,7 +180,7 @@
 ![逻辑](C:\Users\liuJD\Documents\Tencent Files\762022369\FileRecv\绘图2.png)
 **HTTP说明**
 
-	远程API： www.dyday.cn/apis/wechat/articels/count？access_token=TOKEN
+	远程API： www.dmday.cn/apis/wechat/articels/count？access_token=TOKEN
     请求方式：GET
     返回数据示例：
     {
@@ -230,7 +230,7 @@
 通过管理平台更新文章内容
 **http说明**
 
-	远程API： www.dyday.cn/apis/wechat/articles/ARTICLEID
+	远程API： www.dmday.cn/apis/wechat/articles/ARTICLEID
     请求方式：PUT
     数据示例：
     {

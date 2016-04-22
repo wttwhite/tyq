@@ -4,8 +4,8 @@
 通过该接口获取用户姓名，手机号，血糖，积分等基本信息
 **HTTP说明**
 
-	管理平台API：cms.dyday.cn/api/users
-    远程API：www.dyday.cn/apis/users?scope=base&page=PAGE&access_token=TOKEN&filter[where][role]=1&filter[where][role]=2
+	管理平台API：cms.dmday.cn/api/users?scope=base&page=PAGE&access_token=TOKEN&filter[where][role]=1&filter[where][role]=2
+    远程API：www.dmday.cn/apis/users?scope=base&page=PAGE&access_token=TOKEN&filter[where][role]=1&filter[where][role]=2
     请求方式：GET
     
 |参数|说明|
@@ -19,6 +19,7 @@
         count: 20,
         content: [{
         	id: ID,
+            headImg: HEADIMG,
             name: NAME,
             phone: PHONE,
             BGtype: TYPE,
@@ -27,6 +28,7 @@
             role: 1
         },{
         	id: ID,
+            headImg: HEADIMG,
             name: NAME,
             phone: PHONE,
             BGtype: TYPE,
@@ -37,10 +39,11 @@
     }
 |参数|说明|
 |---|---|
-|total|数量总量|
-|count|当前数据记录量|
-|content|数据内容|
+|total|用户记录总量|
+|count|当前返回数据记录总量|
+|content|返回数据内容|
 |id|用户ID|
+|headImg|用户头像URL|
 |name|用户名|
 |phone|用户手机号|
 |BGtype|糖尿病类型（数字标识）|
@@ -52,8 +55,8 @@
 ###基本信息
 **http说明**
     
-    管理平台API： cms.dyday.cn/api/users/ID？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID？access_token=TOKEN
     请求方式：GET
 
 |参数|说明|
@@ -89,8 +92,8 @@
 ###健康信息
 **HTTP说明**
 
-	管理平台API： cms.dyday.cn/api/users/ID/health？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/health？access_token=TOKEN
+	管理平台API： cms.dmday.cn/api/users/ID/health？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/health？access_token=TOKEN
     请求方式：GET
     返回数据示例：
     {
@@ -114,8 +117,8 @@
 ###检查数据
 **HTTP说明**
 	
-    管理平台API： cms.dyday.cn/api/users/ID/examine？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/examine？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/examine？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/examine？access_token=TOKEN
     请求方式：GET
     返回数据示例：
     {
@@ -155,33 +158,82 @@
 ###控糖日志
 **HTTP说明**
 	
-    管理平台API： cms.dyday.cn/api/users/ID/log？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/log？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/log？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/log？access_token=TOKEN
     请求方式：GET
     返回数据示例：
 	{
-    	
+    	diet: [{
+        	dinnerType: 1,
+            eated: [{
+                type: 1,
+                dosage: 150,
+                unit: "g"
+            }],
+            remark: REMARK,
+            remarkImg: [IMGURL]
+        }],
+        sport: [{
+        	time: TIME,
+            record: RECORD,
+            rematk: REMARK,
+            remarkImg: [IMGURL]
+        }],
+        ADrug: [{
+        	time: TIME,
+            record: RECORD,
+            rematk: REMARK,
+            remarkImg: [IMGURL]
+        }]
     }
+|参数|说明|
+|---|---|
+|diet|饮食记录，对象数组|
+|dinnerType|用餐时间点（早中晚，加餐）|
+|eated|饮食记录（食物用量记录）|
+|remark|备注|
+|remarkImg|备注图片|
+|sport|运动记录，对象数组|
+|time|时间点|
+|record|记录值，字符串|
+|ADrug|用药记录，对象数组|
 ###控糖方案
 **HTTP说明**
 	
-    管理平台API： cms.dyday.cn/api/users/ID/schema？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/schema？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/schema？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/schema？access_token=TOKEN
     请求方式：GET
     返回数据示例：
 	{
-    	diet: {
-        	
-        },
-        sport: {
-        	
-        }
+    	diet: [{
+        	type: 1,
+            dosage: 150,
+            unit: "g"
+        },{
+        	foodType: 3,
+            dosage: 4,
+            unit: "ng/ml"
+        }],
+        sport: [{
+        	type: 1,
+            dosage: 1.2,
+            unit: "mmo/l"
+        }]
     }
+|参数|说明|
+|---|----|
+|id|选择的用户ID|
+|diet|饮食推荐|
+|type|类型（在饮食中对应事物类型，在运动中对应运动类型）|
+|dosage|对应使用量，数值|
+|unit|对应单位，如kg，g，mmo/L|
+|sport|运动推荐|
+
 ###血糖分析
 **HTTP说明**
 	
-    管理平台API： cms.dyday.cn/api/users/ID/analysis？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/analysis？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/analysis？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/analysis？access_token=TOKEN
     请求方式：GET
     返回数据示例：
 	{
@@ -192,8 +244,8 @@
 ###基本信息
 **http说明**
     
-    管理平台API： cms.dyday.cn/api/users/ID？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID？access_token=TOKEN
     请求方式：PUT
 	数据示例：
     {
@@ -206,11 +258,11 @@
 |id|用户ID|
 |points|修改的积分值|
 |role|修改用户角色|
-###健康信息
+###修改健康信息
 **HTTP说明**
 
-	管理平台API： cms.dyday.cn/api/users/ID/health？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/health？access_token=TOKEN
+	管理平台API： cms.dmday.cn/api/users/ID/health？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/health？access_token=TOKEN
     请求方式：PUT
     数据示例：
     {
@@ -231,11 +283,11 @@
 |chronic| 已有症状|
 |labourIntensive|劳动强度 |
 |medication| 用药情况|
-###检查数据
+###修改检查数据
 **HTTP说明**
 	
-    管理平台API： cms.dyday.cn/api/users/ID/examine？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/examine？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/examine？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/examine？access_token=TOKEN
     请求方式：PUT
     数据示例：
     {
@@ -273,21 +325,37 @@
 |GPT|肝功能检查|
 |GPT.GPT|丙谷转氨酶|
 
-###控糖方案
+###修改控糖方案
 **HTTP说明**
 	
-    管理平台API： cms.dyday.cn/api/users/ID/schema？access_token=TOKEN
-    远程API： www.dyday.cn/apis/users/ID/schema？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/schema？access_token=TOKEN
+    远程API： www.dmday.cn/apis/users/ID/schema？access_token=TOKEN
     请求方式：PUT
     返回数据示例：
 	{
-    	diet: {
-        	
-        },
-        sport: {
-        	
-        }
+    	diet: [{
+        	type: 1,
+            dosage: 150,
+            unit: "g"
+        },{
+        	foodType: 3,
+            dosage: 4,
+            unit: "ng/ml"
+        }],
+        sport: [{
+        	type: 1,
+            dosage: 1.2,
+            unit: "mmo/l"
+        }]
     }
+|参数|说明|
+|---|----|
+|id|选择的用户ID|
+|diet|饮食推荐|
+|type|类型（在饮食中对应事物类型，在运动中对应运动类型）|
+|dosage|对应使用量，数值|
+|unit|对应单位，如kg，g，mmo/L|
+|sport|运动推荐|
 
 
 
