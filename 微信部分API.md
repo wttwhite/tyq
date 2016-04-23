@@ -207,6 +207,7 @@
     }
     
     获取文章列表API：cms.dyday.cn/apis/wechat/articels？page=PAGE&access_token=TOKEN
+###文章列表
     获取文章列表远程API：cms.dyday.cn/apis/wechat/articels？page=PAGE&access_token=TOKEN
     请求方式：GET
     返回示例：
