@@ -180,13 +180,13 @@
 ![逻辑](C:\Users\liuJD\Documents\Tencent Files\762022369\FileRecv\绘图2.png)
 **HTTP说明**
 
-	远程API： www.dmday.cn/apis/wechat/articels/count？access_token=TOKEN
+    远程API： www.dmday.cn/apis/wechat/articels/count？access_token=TOKEN
     请求方式：GET
     返回数据示例：
     {
     	count: 20
     }
-    
+    （触发更新数据）管理平台API: cms.dmday.cn/api/wechat/articles？access_token=TOKEN
 	保存数据远程API： www.dyday.cn/apis/wechat/articels？access_token=TOKEN
     请求方式：POST
     数据示例：
@@ -206,9 +206,10 @@
     	status： 200
     }
     
-    获取文章列表API：cms.dyday.cn/apis/wechat/articels？page=PAGE&access_token=TOKEN
+    
 ###文章列表
-    获取文章列表远程API：cms.dyday.cn/apis/wechat/articels？page=PAGE&access_token=TOKEN
+	获取文章列表API：cms.dyday.cn/api/news？page=PAGE&access_token=TOKEN
+    获取文章列表远程API：www.dyday.cn/apis/wechat/articels？page=PAGE&access_token=TOKEN
     请求方式：GET
     返回示例：
     {
@@ -217,20 +218,35 @@
     	content:[{
            "id": ARTICLEID
            "title": TITLE,
-           "thumb_media_id": THUMB_MEDIA_ID,
            "thumb_url": THUMB_URL,
-           "show_cover_pic": SHOW_COVER_PIC(0 / 1),
-           "author": AUTHOR,
            "digest": DIGEST,
-           "content": CONTENT,
-           "url": URL,
-           "content_source_url": CONTETN_SOURCE_URL
         }]
+    }
+##获取文章内容
+通过管理平台浏览文章内容
+**http说明**
+
+	管理平台API：cms.dmday.cn/api/news/ID?access_token=ACCESSTOKEN
+	远程API： www.dmday.cn/apis/wechat/articles/ARTICLEID
+    请求方式：GET
+    数据示例：
+    {
+       "id": ARTICLEID
+       "title": TITLE,
+       "thumb_media_id": THUMB_MEDIA_ID,
+       "thumb_url": THUMB_URL,
+       "show_cover_pic": SHOW_COVER_PIC(0 / 1),
+       "author": AUTHOR,
+       "digest": DIGEST,
+       "content": CONTENT,
+       "url": URL,
+       "content_source_url": CONTETN_SOURCE_URL
     }
 ##更新文章内容
 通过管理平台更新文章内容
 **http说明**
 
+	管理平台API：cms.dmday.cn/api/news/ID?access_token=ACCESSTOKEN
 	远程API： www.dmday.cn/apis/wechat/articles/ARTICLEID
     请求方式：PUT
     数据示例：
@@ -246,6 +262,47 @@
        "url": URL,
        "content_source_url": CONTETN_SOURCE_URL
     }
+##删除文章
+通过管理平台更新文章内容
+**http说明**
+
+	单条信息删除：
+	管理平台API：cms.dmday.cn/api/news/ID?access_token=ACCESSTOKEN
+	远程API： www.dmday.cn/apis/wechat/articles/ARTICLEID?access_token=ACCESSTOKEN
+    请求方式：DELETE
+    
+    多条信息删除：
+    管理平台API：cms.dmday.cn/api/news?access_token=ACCESSTOKEN
+	远程API： www.dmday.cn/apis/wechat/articles?access_token=ACCESSTOKEN
+    请求方式：DELETE
+    数据示例：
+    	["ARTICLEID1","ARTICLEID2"]
+        
+    返回示例：
+    {
+       status：200
+    }
+##同步文章到社区
+在管理平台可操作把文章同步到社区。
+**http说明**
+
+	单文章同步：
+    管理平台API：cms.dmday.cn/api/news/ID/synchronize?access_token=ACCESSTOKEN
+	远程API： www.dmday.cn/apis/wechat/articles/ARTICLEID/synchronize?access_token=ACCESSTOKEN
+    请求方式：POST
+   
+	多文章同步：
+    管理平台API：cms.dmday.cn/api/news/synchronize?access_token=ACCESSTOKEN
+	远程API： www.dmday.cn/apis/wechat/articles/synchronize?access_token=ACCESSTOKEN
+    请求方式：POST
+    数据示例：
+    ["ARTICLEID1","ARTICLEID2"]
+    
+     返回示例：
+    {
+       status：200
+    }
+    
 |参数|说明|
 |---|---|
 |id|文章ID（POST时没有该字段）|
