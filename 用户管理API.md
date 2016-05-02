@@ -74,7 +74,7 @@
         role: ROLE,
         sex: SEX,
         topics: TOPICCOUNT,
-        comments: COMMENTCOUNT
+        replies: COMMENTCOUNT
     }
 
 |参数|说明|
@@ -232,13 +232,20 @@
 ###血糖分析
 **HTTP说明**
 	
-    管理平台API： cms.dmday.cn/api/users/ID/analysis？access_token=TOKEN
-    远程API： www.dmday.cn/apis/users/ID/analysis？access_token=TOKEN
+    管理平台API： cms.dmday.cn/api/users/ID/analysis？access_token=TOKEN&year=YEAR&mon=MONTH
+    远程API： www.dmday.cn/apis/users/ID/analysis？access_token=TOKEN&year=YEAR&mon=MONTH
     请求方式：GET
+|参数|说明|
+|---|---|
+|year|查询的年份|
+|mon|查询的月份|
     返回数据示例：
-	{
-    	
-    }
+	[{
+    	day：DAY，
+    	BG：[2,3,4,5,6,6,8,8]
+    }]
+> 返回说明：返回查询当月的数据，一维数组表示某天的数据，二维数组表示用餐时间点对于的血糖记录
+
 ##修改用户信息
 对用户部分信息进行修改
 ###基本信息
@@ -356,6 +363,56 @@
 |dosage|对应使用量，数值|
 |unit|对应单位，如kg，g，mmo/L|
 |sport|运动推荐|
+#积分管理
+###积分列表
 
+	管理平台API：cms.dmday.cn/api/users/ID/points?page=PAGE&access_token=TOKEN
+    远程API：www.dmday.cn/apis/users/ID/points?page=PAGE&access_token=TOKEN
+    请求方式：GET
+    返回数据示例：
+    {
+    	total: 2000,
+        count: 20,
+        content: [{
+        	id: ID,
+            created: CREATETIME,
+            count: CHANGECOUNT,
+            reason: {
+            	message: MESSAGE,
+                goodId: GOODID
+            }
+        },{
+        	id: ID,
+            created: CREATETIME,
+            count: CHANGECOUNT,
+            reason: {
+            	message: MESSAGE,
+                goodId: GOODID
+            }
+        }]
+    }
+|参数|说明|
+|---|---|
+|total|用户记录总量|
+|count|当前返回数据记录总量|
+|content|返回数据内容|
+|id|用户ID|
+|created|记录创建时间|
+|count|积分变化数量|
+|reason|积分变化原因|
+|message|变化原因说明，如签到，兑换商品等等|
+|goodId|如果是商品兑换着该字段对应商品ID|
+###删除积分记录
+	管理平台API：cms.dmday.cn/api/users/ID/points/fk?access_token=TOKEN
+    远程API：www.dmday.cn/apis/users/ID/points/fk?access_token=TOKEN
+    请求方式：DELETE
+|参数|说明|
+|---|---|
+|ID|用户ID|
+|fk|积分记录ID|
+    返回数据示例：
+    {
+    	status: 200
+    }
 
 

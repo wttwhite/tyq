@@ -199,7 +199,8 @@
        "digest": DIGEST,
        "content": CONTENT,
        "url": URL,
-       "content_source_url": CONTETN_SOURCE_URL
+       "content_source_url": CONTETN_SOURCE_URL,
+       "update_time": UPDATETIME
     }]
     返回数据示例
     {
@@ -220,6 +221,9 @@
            "title": TITLE,
            "thumb_url": THUMB_URL,
            "digest": DIGEST,
+           "author": AUTHOR,
+           "update_time": UPDATETIME,
+           "tags": TAG
         }]
     }
 ##获取文章内容
@@ -240,7 +244,9 @@
        "digest": DIGEST,
        "content": CONTENT,
        "url": URL,
-       "content_source_url": CONTETN_SOURCE_URL
+       "content_source_url": CONTETN_SOURCE_URL,
+       "update_time": UPDATETIME,
+       "tags": TAG
     }
 ##更新文章内容
 通过管理平台更新文章内容
@@ -260,7 +266,9 @@
        "digest": DIGEST,
        "content": CONTENT,
        "url": URL,
-       "content_source_url": CONTETN_SOURCE_URL
+       "content_source_url": CONTETN_SOURCE_URL,
+       "update_time": UPDATETIME,
+       "tags": TAG
     }
 ##删除文章
 通过管理平台更新文章内容
@@ -315,3 +323,5 @@
 |content|图文消息的具体内容|
 |url|图文页的URL|
 |content_source_url|点击“阅读原文”后的URL|
+|update_time|文章最后跟新时间|
+|tags|标签，由编辑后添加的，字符串以逗号分隔|
